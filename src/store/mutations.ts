@@ -1,4 +1,4 @@
-import { State } from "@/models/state";
+import { State } from '@/models/state'
 import { AuthenticatedUser } from '@/models/auth-user'
 
 export const MUTATE_USER = 'MUTATE_USER'

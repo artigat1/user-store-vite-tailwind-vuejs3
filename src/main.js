@@ -1,10 +1,15 @@
 import { createApp } from 'vue'
-import './tailwind.css'
+
 import App from './App.vue'
 import router from '@/router'
-import store from '@/store'
+import {
+    key,
+    store
+} from '@/store'
+
+import './tailwind.css'
 
 createApp(App)
-    .use(store)
+    .use(store, key)
     .use(router)
     .mount('#app')

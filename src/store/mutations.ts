@@ -1,8 +1,8 @@
 import { State } from '@/models/state'
-import { AuthenticatedUser } from '@/models/auth-user'
+import { AuthenticatedUser } from '@/models/authenticated-user'
 
-export const MUTATE_USER = 'MUTATE_USER'
-export const MUTATE_IS_AUTHENTICATED = 'MUTATE_IS_AUTHENTICATED'
+export const MUTATE_USER = 'user/mutate-user'
+export const MUTATE_IS_AUTHENTICATED = 'user/mutate-is-authenticated'
 
 export type Mutations<S = State> = {
     [MUTATE_USER](state: S, user: AuthenticatedUser): void,

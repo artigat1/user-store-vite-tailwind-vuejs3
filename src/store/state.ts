@@ -1,8 +1,10 @@
-import { AuthenticatedUser } from '@/models/authenticated-user'
+import { AuthenticatedUser } from '@/models/AuthenticatedUser'
+import { User } from '@/models/user'
 
 export const state = {
-    user: {} as AuthenticatedUser,
+    authenticatedUser: {} as AuthenticatedUser,
     isAuthenticated: false,
+    users: [] as User[]
 }
 
 export type State = typeof state

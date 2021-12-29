@@ -42,7 +42,7 @@
 
 <script lang="ts"
         setup>
-    import { computed, ref, watch } from 'vue'
+    import { computed, ref, watchEffect } from 'vue'
 
     import { login } from '@/api/login.auth'
     import { useStore } from '@/store'
@@ -54,16 +54,16 @@
     const errorMessage = ref('')
     const isAuthenticated = computed((): Boolean => store.getters.isAuthenticated)
 
-    watch(() => isAuthenticated, (newValue): void => {
-        if (newValue) {
-            router.push('/list')
+    watchEffect(() => {
+        if (isAuthenticated.value) {
+            router.push('/')
         }
     })
 
     const userLogin = async () => {
         try {
             await login(email.value, password.value)
-        } catch (error) {
+        } catch (error: any) {
             console.error(error)
             errorMessage.value = `${ error.code }: ${ error.message }`
         }

@@ -7,9 +7,9 @@ import FirebaseFirestore, {
 } from 'firebase/auth'
 
 import { auth } from './firebase'
+import { AuthenticatedUser } from '@/models/AuthenticatedUser'
+import { MutationTypes } from '@/store/mutations'
 import { store } from '@/store'
-import { AuthenticatedUser } from '@/models/authenticated-user'
-import { MutationTypes } from '../store/mutations'
 
 onAuthStateChanged(auth, (user: any) => {
     if (user) {
@@ -20,10 +20,10 @@ onAuthStateChanged(auth, (user: any) => {
             id: user.uid,
             lastLoginAt: user.metadata.lastSignInTime,
         }
-        store.commit(MutationTypes.MUTATE_USER, authUser)
+        store.commit(MutationTypes.MUTATE_AUTHENTICATED_USER, authUser)
     } else {
         store.commit(MutationTypes.MUTATE_IS_AUTHENTICATED, false)
-        store.commit(MutationTypes.MUTATE_USER, undefined)
+        store.commit(MutationTypes.MUTATE_AUTHENTICATED_USER, undefined)
     }
 })
 

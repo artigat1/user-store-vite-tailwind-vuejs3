@@ -34,35 +34,23 @@
 
 <script lang="ts"
         setup>
-    import { computed, Ref, ref, UnwrapRef } from 'vue'
+    import { computed } from 'vue'
 
-    import { deleteUserById, getUsers } from '@/api/users.db'
     import { useStore } from '@/store'
+    import { ActionTypes } from '@/store/actions'
     import { User } from '@/models/user'
 
     const store = useStore()
-    let users: Ref<UnwrapRef<User[]>> = ref([])
     const isAuthenticated = computed((): Boolean => store.getters.isAuthenticated)
+    const users = computed((): User[] => store.getters.users)
 
     const getAllUsers = async (): Promise<void> => {
-        console.log('getting users')
-        try {
-            const response = await getUsers()
-            console.log({ response })
-            users.value = response
-            console.log('users', users.value)
-        } catch (error) {
-            console.error(error)
-        }
+        await store.dispatch(ActionTypes.FETCH_ALL_USERS)
     }
+
     const deleteUser = async (id: any): Promise<void> => {
         if (window.confirm('Do you really want to delete?')) {
-            try {
-                await deleteUserById(id)
-                users.value = users.value.filter(u => u.id !== id)
-            } catch (error) {
-                console.error(error)
-            }
+            await store.dispatch(ActionTypes.DELETE_USER, id)
         }
     }
 

@@ -94,14 +94,14 @@
     import { format, utcToZonedTime } from 'date-fns-tz'
 
     import { useStore } from './store'
-    import { AuthenticatedUser } from './models/authenticated-user'
+    import { AuthenticatedUser } from './models/AuthenticatedUser'
     import { logout } from './api/login.auth'
     import router from './router'
 
     const store = useStore()
 
     const isAuthenticated = computed((): Boolean => store.getters.isAuthenticated)
-    const authenticatedUser = computed((): AuthenticatedUser => store.getters.user)
+    const authenticatedUser = computed((): AuthenticatedUser => store.getters.authenticatedUser)
     const authUserEmail = computed((): string => authenticatedUser.value?.email)
 
     const lastLoginAt = computed((): string => {

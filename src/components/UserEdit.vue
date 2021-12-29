@@ -48,17 +48,36 @@
     </div>
 </template>
 
-<script>
-    export default {
-        name: 'UserEdit',
+<script setup lang="ts">
+    import { useRoute } from 'vue-router'
+    import {
+        computed,
+        ref
+    } from 'vue'
 
-        data() {
-            return {}
+    import { useStore } from '@/store'
+    import { ActionTypes } from '@/store/actions'
+
+    const store = useStore()
+    const route = useRoute()
+    const userId: string | string[] = route.params.id
+    const user = computed(store.getters.getUserById(userId))
+    const name = computed(() => ({
+        get() {
+            console.log('name get', user.value)
+            return user.name.value
         },
+    }))
+    
+    console.log({ user })
+    console.log({userId})
+    
+    const updateUser = async () => {
+        await store.dispatch(ActionTypes.UPDATE_USER, {
+            id: userId,
+            name: name,
+            phone: phone.value,
+            email: email.value,
+        })
     }
 </script>
-
-<style lang="scss"
-       scoped>
-    @import './UserEdit';
-</style>

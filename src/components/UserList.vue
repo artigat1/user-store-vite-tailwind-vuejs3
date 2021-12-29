@@ -1,5 +1,5 @@
 <template>
-    <table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-800 text-gray-200">
+    <table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gradient-to-tr from-teal-900 to-teal-600 text-white">
         <thead>
         <tr class="text-left border-b border-gray-300">
             <th class="px-4 py-3">Name</th>

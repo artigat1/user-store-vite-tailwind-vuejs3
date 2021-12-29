@@ -1,32 +1,40 @@
 <template>
-    <div class="row justify-content-center">
-        <div class="col-md-5">
+    <div class="flex items-top justify-center">
+        <div class="px-8 py-6 mt-4 text-left bg-white shadow-lg">
+            <h3 class="text-2xl font-bold text-center">Login to your account</h3>
             <form @submit.prevent="userLogin">
-                <h3>Sign In</h3>
-
-                <div class="form-group">
-                    <label>Email address</label>
-                    <input v-model="email"
-                           class="form-control form-control-lg"
+                <div class="mt-4">
+                    <label class="block"
+                           for="email">
+                        Email
+                    </label>
+                    <input id="email"
+                           v-model="email"
+                           class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-teal-600"
+                           placeholder="Email"
                            type="email" />
                 </div>
-
-                <div class="form-group">
-                    <label>Password</label>
-                    <input v-model="password"
-                           class="form-control form-control-lg"
+                <div class="mt-4">
+                    <label class="block"
+                           for="password">
+                        Password
+                    </label>
+                    <input id="password"
+                           v-model="password"
+                           class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                           placeholder="Password"
                            type="password" />
                 </div>
-
-                <div v-if="errorMessage">{{ errorMessage }}</div>
-
-                <button class="btn btn-dark btn-lg btn-block"
-                        type="submit">Sign In
-                </button>
-
-                <p class="forgot-password text-right mt-2 mb-4">
-                    <router-link to="/forgot-password">Forgot password ?</router-link>
-                </p>
+                <div class="flex items-baseline justify-between">
+                    <button class="px-6 py-2 mt-4 text-white bg-teal-600 rounded-lg hover:bg-gray-200 hover:text-teal-600"
+                            type="submit">
+                        Login
+                    </button>
+                    <a class="text-sm text-teal-600 hover:underline"
+                       href="#">
+                        Forgot password?
+                    </a>
+                </div>
             </form>
         </div>
     </div>

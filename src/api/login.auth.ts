@@ -9,21 +9,21 @@ import FirebaseFirestore, {
 import { auth } from './firebase'
 import { store } from '@/store'
 import { AuthenticatedUser } from '@/models/authenticated-user'
-import { MUTATE_IS_AUTHENTICATED, MUTATE_USER } from '../store/mutations'
+import { MutationTypes } from '../store/mutations'
 
 onAuthStateChanged(auth, (user: any) => {
     if (user) {
-        store.commit(MUTATE_IS_AUTHENTICATED, true)
+        store.commit(MutationTypes.MUTATE_IS_AUTHENTICATED, true)
         const authUser: AuthenticatedUser = {
             email: user.email,
             accessToken: user.accessToken,
             id: user.uid,
             lastLoginAt: user.metadata.lastSignInTime,
         }
-        store.commit(MUTATE_USER, authUser)
+        store.commit(MutationTypes.MUTATE_USER, authUser)
     } else {
-        store.commit(MUTATE_IS_AUTHENTICATED, false)
-        store.commit(MUTATE_USER, undefined)
+        store.commit(MutationTypes.MUTATE_IS_AUTHENTICATED, false)
+        store.commit(MutationTypes.MUTATE_USER, undefined)
     }
 })
 

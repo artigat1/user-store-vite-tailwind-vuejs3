@@ -35,13 +35,12 @@
 <script lang="ts"
         setup>
     import { computed, Ref, ref, UnwrapRef } from 'vue'
-    import { useStore } from 'vuex'
 
     import { deleteUserById, getUsers } from '@/api/users.db'
-    import { key } from '@/store'
+    import { useStore } from '@/store'
     import { User } from '@/models/user'
 
-    const store = useStore(key)
+    const store = useStore()
     let users: Ref<UnwrapRef<User[]>> = ref([])
     const isAuthenticated = computed((): Boolean => store.getters.isAuthenticated)
 
@@ -51,6 +50,7 @@
             const response = await getUsers()
             console.log({ response })
             users.value = response
+            console.log('users', users.value)
         } catch (error) {
             console.error(error)
         }

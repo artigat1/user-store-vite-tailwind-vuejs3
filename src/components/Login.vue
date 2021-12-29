@@ -43,13 +43,12 @@
 <script lang="ts"
         setup>
     import { computed, ref, watch } from 'vue'
-    import { useStore } from 'vuex'
 
     import { login } from '@/api/login.auth'
-    import { key } from '../store'
+    import { useStore } from '@/store'
     import router from '../router'
 
-    const store = useStore(key)
+    const store = useStore()
     const email = ref('')
     const password = ref('')
     const errorMessage = ref('')

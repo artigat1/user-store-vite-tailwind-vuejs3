@@ -44,34 +44,14 @@
 
 
     <nav class="flex justify-between px-6 py-4 bg-gradient-to-tr from-teal-900 to-teal-400 items-center">
-<!--        <div class="flex items-center space-x-2">-->
-<!--            <svg class="h-10 w-10 text-white"-->
-<!--                 fill="none"-->
-<!--                 stroke="currentColor"-->
-<!--                 viewBox="0 0 24 24"-->
-<!--                 xmlns="http://www.w3.org/2000/svg">-->
-<!--                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"-->
-<!--                      stroke-linecap="round"-->
-<!--                      stroke-linejoin="round"-->
-<!--                      stroke-width="2" />-->
-<!--            </svg>-->
-<!--            <h1 class="text-2xl text-white font-bold cursor-pointer">Contact Keeper</h1>-->
-<!--        </div>-->
-<!--        <div class="flex items-center space-x-6">-->
-<!--            <span class="text-white font-semibold text-lg cursor-pointer">Home</span>-->
-<!--            <span class="text-white font-semibold text-lg cursor-pointer">About</span>-->
-<!--        </div>-->
-
-
         <div class="flex items-center space-x-2">
             <div class="flex items-center flex-no-shrink text-white mr-6">
                 <a class="font-semibold text-xl tracking-tight">Firebase Vue CRUD Example</a>
             </div>
         </div>
         <div class="flex items-center space-x-6">
-            <div class="block lg:hidden">
-                <div v-if="isAuthenticated"
-                     class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
+            <div v-if="isAuthenticated">
+                <div class="flex flex-grow items-center px-3 py-2 border rounded text-white border-teal-light hover:text-white hover:border-white">
                     {{ authUserEmail }} (last login: {{ lastLoginAt }})
                 </div>
             </div>
@@ -84,10 +64,9 @@
                     </router-link>
                 </li>
                 <li v-if="isAuthenticated"
-                    class="nav-item">
-                    <a class="lg:flex-grow"
-                       @click.prevent="onLogout">Sign Out
-                    </a>
+                    class="lg:flex-grow">
+                    <a class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4"
+                       @click.prevent="onLogout">Sign Out</a>
                 </li>
                 <li v-if="isAuthenticated"
                     class="lg:flex-grow">
@@ -112,15 +91,14 @@
 <script lang="ts"
         setup>
     import { computed } from 'vue'
-    import { useStore } from 'vuex'
     import { format, utcToZonedTime } from 'date-fns-tz'
 
-    import { key } from './store'
+    import { useStore } from './store'
     import { AuthenticatedUser } from './models/authenticated-user'
     import { logout } from './api/login.auth'
     import router from './router'
 
-    const store = useStore(key)
+    const store = useStore()
 
     const isAuthenticated = computed((): Boolean => store.getters.isAuthenticated)
     const authenticatedUser = computed((): AuthenticatedUser => store.getters.user)
